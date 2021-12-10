@@ -5,27 +5,13 @@ import axios from "axios"
 
 const cookies = new Cookies()
 
-const initialState = {
-    fullName: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    phoneNumber: '',
-    avatarURL: '',
-}
-
 const Auth = () => {
-    const [form, setForm] = useState(initialState)
+    // const [form, setForm] = useState(initialState)
     const [isSignup, setIsSignup] = useState(true)
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
-    }
+    const handleSubmit = () => {}
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(form)
-    }
+    const handleChange = () => {}
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
@@ -85,40 +71,56 @@ const Auth = () => {
                     </FieldAccount>
                 </FieldContent>
             </FormFields>
-            <AuthFormContainerImg>
-                <img src="assets/signup.jpg" alt="sign in"/>
-            </AuthFormContainerImg>
+            <BgImage />
         </AuthFormContainer>
     )
 }
 
 const AuthFormContainer = styled.div`
-min-height: 100vh;
-display: flex;
-flex-direction: row;
+height: 100vh;
+overflow: hidden;
+`;
+
+const BgImage = styled.div`
+height: 100%;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/assets/signupbg.jpg");
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
 `;
 
 const FormFields = styled.div`
-flex: 2;
 display: flex;
 flex-direction: column;
+align-items: center;
 justify-content: center;
+margin-right: 0px;
 padding: 2rem;
-background: #005fff;
+background: rgba(255, 255, 255, 0.05);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+backdrop-filter: saturate(180%) blur(10px);
+height: 100%;
+width: 40%;
+margin-right: 0;
+margin-left: auto;
 `;
 
 const FieldContent = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
+
 padding: 2rem;
 box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
 border-radius: 5px;
 transition: 0.8s ease;
 background: #fff;
+width: 70%;
 p {
     font-size: 1.5rem;
-    color: #05245a;
+    color: rgb(13, 17, 19);
     font-weight: 700;
 }
 `;
@@ -126,7 +128,6 @@ p {
 const FieldContentInput = styled.div`
 display: flex;
 flex-direction: column;
-position: relative;
 margin: 1rem 0rem;
 label {
     margin-bottom: 0.45rem;
@@ -166,33 +167,22 @@ span {
 }
 `;
 
-const AuthFormContainerImg = styled.div`
-flex: 3;
-display: flex;
-box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.05);
-img {
-    width: 100%;
-    height: 100%; 
-}
-`;
-
 const FieldContentButton = styled.div`
 margin-top: 2rem;
 display: flex;
 justify-content: flex-start;
 button {
     border-radius: 4px;
-    background: #005fff;
-    border: 1px solid #005fff;
+    background-color: rgb(13, 17, 19);
+    border: none;
     color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     padding: 0.7rem 1.2rem;
     outline: none;
     cursor: pointer;
     transition: 0.3s ease;
     &:hover {
-        background: #0066ff;
+        background: rgb(29, 39, 43);
     }
 }
 `;
