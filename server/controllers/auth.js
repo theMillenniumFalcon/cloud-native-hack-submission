@@ -26,11 +26,29 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     const { username, password } = req.body
 
-    if(!email || !password) {
-        return next(new ErrorResponse("Please provide an email and password!", 400))
+    if(!username || !password) {
+        return next(new ErrorResponse("Please provide an username and password", 400))
     }
 
     try {
+        const serverClient = connect(API_KEY, API_SECRET, API_ID)
+        const client = StreaamChat.getInstance(API_KEY, API_SECRET)
+
+        const { users } = await client.queryUsers({ name: username})
+
+        if(!users.length) {
+            return next(new ErrorResponse("User not found", 400))
+        }
+
+        const success = await bcrypt.compare(password, users[0].hashedPassword)
+
+        const token = serverClient.createUserToken(users[0].id)
+
+        if (success) {
+            res.status(200).json({ token, fullName: users[0].fullName, username, userId: users[0].id })
+        } else {
+            return next(new ErrorResponse("Incorrect password", 400))
+        }
 
     } catch(error) {
         next(error)
