@@ -5,13 +5,27 @@ import axios from "axios"
 
 const cookies = new Cookies()
 
+const initialState = {
+    fullName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: '',
+    avatarURL: '',
+}
+
 const Auth = () => {
-    // const [form, setForm] = useState(initialState)
+    const [form, setForm] = useState(initialState)
     const [isSignup, setIsSignup] = useState(true)
 
-    const handleSubmit = () => {}
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
 
-    const handleChange = () => {}
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(form)
+    }
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
@@ -55,12 +69,12 @@ const Auth = () => {
                                 <input name="confirmPassword" type="password" placeholder="Confirm Password" onChange={handleChange} required/>
                             </FieldContentInput>
                         )}
+                        <FieldContentButton>
+                            <button>
+                                {isSignup ? "Sign Up" : "Sign In"}
+                            </button>
+                        </FieldContentButton>
                     </form>
-                    <FieldContentButton>
-                        <button>
-                            {isSignup ? "Sign Up" : "Sign In"}
-                        </button>
-                    </FieldContentButton>
                     <FieldAccount>
                         <p>
                             {isSignup ? "Already have an account" : "Don't have an account?"}
@@ -78,7 +92,6 @@ const Auth = () => {
 
 const AuthFormContainer = styled.div`
 height: 100vh;
-overflow: hidden;
 `;
 
 const BgImage = styled.div`
@@ -104,14 +117,13 @@ padding: 2rem;
 background: rgba(255, 255, 255, 0.05);
 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 backdrop-filter: saturate(180%) blur(10px);
-height: 100%;
+height: 91%;
 width: 40%;
 margin-right: 0;
 margin-left: auto;
 `;
 
 const FieldContent = styled.div`
-
 padding: 2rem;
 box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
 border-radius: 5px;
@@ -161,7 +173,7 @@ p {
     margin-right: 0.5rem;
 }
 span {
-    color: #05245a;
+    color: rgb(13, 17, 19);
     cursor: pointer;
     font-weight: 700;
 }
