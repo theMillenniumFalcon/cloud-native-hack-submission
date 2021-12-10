@@ -6,6 +6,7 @@ import ChannelSearch from '../channelsearch/ChannelSearch'
 import CompanyHeader from '../companyheader/CompanyHeader'
 import Sidebar from '../sidebar/Sidebar'
 import TeamChannelList from '../teamchannellist/TeamChannelList'
+import TeamChannelPreview from '../teamchannelpreview/TeamChannelPreview'
 
 // import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
 
@@ -21,6 +22,19 @@ const Channels = () => {
                     channelRenderFilterFn={() => {}}
                     List={(listProps) => (
                         <TeamChannelList {...listProps} type="team" />
+                    )}
+                    Preview={(previewProps) => (
+                        <TeamChannelPreview {...previewProps} type="team" />
+                    )}
+                />
+                <ChannelList 
+                    filter={{}} 
+                    channelRenderFilterFn={() => {}}
+                    List={(listProps) => (
+                        <TeamChannelList {...listProps} type="messaging" />
+                    )}
+                    Preview={(previewProps) => (
+                        <TeamChannelPreview {...previewProps} type="messaging" />
                     )}
                 />
             </ChannelListWrapper>
