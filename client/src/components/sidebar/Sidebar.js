@@ -23,6 +23,7 @@ const Sidebar = () => {
 const SidebarContainer = styled.div`
 width: 72px;
 height: 100vh;
+background-color: rgb(13, 17, 19);
 box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
 `;
 
@@ -41,7 +42,6 @@ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.33);
 `;
 
 const Icon1Inner = styled.div`
-font-family: Helvetica Neue, sans-serif;
 height: 100%;
 display: flex;
 align-items: center;
