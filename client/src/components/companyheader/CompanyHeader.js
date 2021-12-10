@@ -10,8 +10,10 @@ const CompanyHeader = () => {
 }
 
 const CompanyHeaderContainer = styled.div`
-padding-left: 16px;
-height: 62px;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 60px;
 `;
 
 const HeaderText = styled.div`

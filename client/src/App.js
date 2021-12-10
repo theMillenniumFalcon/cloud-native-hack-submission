@@ -4,7 +4,7 @@ import { StreamChat } from 'stream-chat'
 import { Chat } from 'stream-chat-react'
 import Cookies from 'universal-cookie'
 
-import { ChannelList, Channel } from './components'
+import { Channels, Channel } from './components'
 
 const ApiKey = '4hjn887t4ape'
 
@@ -14,7 +14,7 @@ function App() {
   return (
     <AppContainer>
       <Chat client={client} theme="team light">
-        <ChannelList/>
+        <Channels/>
         <Channel/>
       </Chat>
     </AppContainer>
