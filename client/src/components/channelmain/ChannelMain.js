@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Channel, useChatContext } from 'stream-chat-react'
-import CreateChannel from './createchannel/CreateChannel'
-import EditChannel from './editchannel/EditChannel'
-import ChannelInner from './channelinner/ChannelInner'
-import TeamMessage from './teammessage/TeamMessage'
+import CreateChannel from '../createchannel/CreateChannel'
+import EditChannel from '../editchannel/EditChannel'
+import ChannelInner from '../channelinner/ChannnelInner'
+import TeamMessage from '../teammessage/TeamMessage'
 
 const ChannelMain = ({ isCreating, setIsCreating, isEditing, setIsEditing, createType }) => {
     const { channel } = useChatContext()
