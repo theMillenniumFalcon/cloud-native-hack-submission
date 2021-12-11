@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react'
-
-import { ChannelInfo } from '../assets'
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 export const GiphyContext = React.createContext({})
 
@@ -70,16 +69,16 @@ const TeamChannelHeader = ({ setIsEditing }) => {
         <TeamChannelWrapper>
           <TeamChannelName># {channel.data.name}</TeamChannelName>
           <span style={{ display: 'flex' }} onClick={() => setIsEditing(true)}>
-            <ChannelInfo />
+            <InfoOutlinedIcon />
           </span>
         </TeamChannelWrapper>
       );
     };
   
     const getWatcherText = (watchers) => {
-      if (!watchers) return 'No users online'
-      if (watchers === 1) return '1 user online'
-      return `${watchers} users online`
+      if (!watchers) return 'No users online';
+      if (watchers === 1) return '1 user online';
+      return `${watchers} users online`;
     }
   
     return (

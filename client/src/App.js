@@ -6,6 +6,8 @@ import Cookies from 'universal-cookie'
 
 import { Channels, ChannelMain, Auth } from './components'
 
+import 'stream-chat-react/dist/css/index.css'
+
 const cookies = new Cookies()
 
 const ApiKey = '4hjn887t4ape'
