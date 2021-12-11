@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import AddChannel from '../../AddChannel'
+import {AddChannel} from '../../AddChannel'
 
-const TeamChannelList = ({ children, error = false, loading, type }) => {
+const TeamChannelList = ({ children, error = false, loading, type, isCreating, setIsCreating, setCreateType, setIsEditing }) => {
     if (error) {
         return type === 'team' ? (
             <TeamChannelListContainer>
@@ -27,9 +27,15 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
         <TeamChannelListContainer>
             <ListHeader>
                 <ListTitle>
-                {type === 'team' ? 'Channels' : 'DIrect Messages'}
+                {type === 'team' ? 'Channels' : 'Direct Messages'}
                 </ListTitle>
-                <AddChannel/>
+                <AddChannel
+                    isCreating={isCreating}
+                    setIsCreating={setIsCreating}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
+                    type={type === 'team' ? 'team' : 'messaging'}
+                />
             </ListHeader>
             {children}
         </TeamChannelListContainer>

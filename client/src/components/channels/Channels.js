@@ -28,7 +28,7 @@ const Sidebar = ({ logout }) => {
     )
 }
 
-const Channels = () => {
+const Channels = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
     const logout = () => {
         cookies.remove("token");
         cookies.remove('userId');
@@ -50,7 +50,12 @@ const Channels = () => {
                     filter={{}} 
                     channelRenderFilterFn={() => {}}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps} type="team" />
+                        <TeamChannelList {...listProps} type="team" 
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating} 
+                            setCreateType={setCreateType} 
+                            setIsEditing={setIsEditing}
+                        />
                     )}
                     Preview={(previewProps) => (
                         <TeamChannelPreview {...previewProps} type="team" />
@@ -60,7 +65,12 @@ const Channels = () => {
                     filter={{}} 
                     channelRenderFilterFn={() => {}}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps} type="messaging" />
+                        <TeamChannelList {...listProps} type="messaging" 
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating} 
+                            setCreateType={setCreateType} 
+                            setIsEditing={setIsEditing}
+                        />
                     )}
                     Preview={(previewProps) => (
                         <TeamChannelPreview {...previewProps} type="messaging" />
