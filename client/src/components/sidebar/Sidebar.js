@@ -2,8 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 
 const Sidebar = () => {
+    const logout = () => {
+        cookies.remove('token')
+        cookies.remove('userId')
+        cookies.remove('username')
+        cookies.remove('fullName')
+        cookies.remove('avatarURL')
+        cookies.remove('hashedPassword')
+        cookies.remove('phoneNumber')
+  
+        window.location.reload()
+    }
+
     return (
         <SidebarContainer>
             <SidebarIcon1>
@@ -13,7 +27,7 @@ const Sidebar = () => {
             </SidebarIcon1>
             <SidebarIcon2>
                 <Icon1Inner>
-                    <ExitToAppIcon/>
+                    <ExitToAppIcon onClick={logout}/>
                 </Icon1Inner>
             </SidebarIcon2>
         </SidebarContainer>

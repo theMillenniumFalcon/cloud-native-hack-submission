@@ -1,14 +1,11 @@
 import React from 'react'
 import { ChannelList, useChatContext } from 'stream-chat-react'
 import styled from 'styled-components'
-import Cookies from 'universal-cookie'
 import ChannelSearch from '../channelsearch/ChannelSearch'
 import CompanyHeader from '../companyheader/CompanyHeader'
 import Sidebar from '../sidebar/Sidebar'
 import TeamChannelList from '../teamchannellist/TeamChannelList'
 import TeamChannelPreview from '../teamchannelpreview/TeamChannelPreview'
-
-// import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
 
 const Channels = () => {
     return (
