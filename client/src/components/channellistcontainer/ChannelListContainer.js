@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ChannelList, useChatContext } from 'stream-chat-react'
 import styled from 'styled-components'
 import HomeIcon from '@material-ui/icons/Home';
@@ -42,7 +42,7 @@ const customChannelMessagingFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'messaging')
 }
 
-const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
     const { client } = useChatContext()
 
     const logout = () => {
@@ -96,33 +96,6 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
                     )}
                 />
             </ChannelListWrapper>
-        </>
-    )
-}
-
-const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) => {
-    const [toggleContainer, setToggleContainer] = useState(false)
-
-    return (
-        <>
-        <ChannelContainer>
-            <ChannelListContent 
-                setIsCreating={setIsCreating} 
-                setCreateType={setCreateType} 
-                setIsEditing={setIsEditing} 
-            />
-            <ChannelContainerResponsive
-                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#005fff"}}
-            >
-                <ChannelContainerToggle onClick={() => setToggleContainer((prevToggleContainer) => !prevToggleContainer)} />
-            </ChannelContainerResponsive>
-            <ChannelListContent 
-                setIsCreating={setIsCreating} 
-                setCreateType={setCreateType} 
-                setIsEditing={setIsEditing}
-                setToggleContainer={setToggleContainer}
-              />
-        </ChannelContainer>
         </>
     )
 }
@@ -189,24 +162,5 @@ font-weight: bold;
 line-height: 28px;
 color: rgb(33, 42, 46);
 `;
-
-const ChannelContainer = styled.div`
-display: flex;
-height: 100%;
-box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
-`;
-
-const ChannelContainerResponsive = styled.div`
-display: none;
-height: 100%;
-box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
-position: absolute;
-width: 90%;
-top: 0%;
-z-index: 5;
-transition: 0.8s ease;
-`;
-
-const ChannelContainerToggle = styled.div``;
 
 export default ChannelListContainer
