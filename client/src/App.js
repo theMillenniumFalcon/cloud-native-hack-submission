@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { StreamChat } from 'stream-chat'
 import { Chat } from 'stream-chat-react'
 import Cookies from 'universal-cookie'
 
-import { Channels, Channel, Auth } from './components'
+import { Channels, ChannelMain, Auth } from './components'
 
 const cookies = new Cookies()
 
@@ -25,14 +25,28 @@ if(authToken) {
 }
 
 function App() {
+  const [createType, setCreateType] = useState('')
+  const [isCreating, setIsCreating] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
 
   if (!authToken) return <Auth/>
 
-  return (
+  return ( 
     <AppContainer>
       <Chat client={client} theme="team light">
-        <Channels/>
-        <Channel/>
+        <Channels
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          setCreateType={setCreateType}
+          setIsEditing={setIsEditing}
+        />
+        <ChannelMain
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          createType={createType}
+        />
       </Chat>
     </AppContainer>
   );

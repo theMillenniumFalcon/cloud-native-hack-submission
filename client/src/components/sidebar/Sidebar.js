@@ -27,7 +27,7 @@ const Sidebar = () => {
             </SidebarIcon1>
             <SidebarIcon2>
                 <Icon1Inner>
-                    <ExitToAppIcon onClick={logout}/>
+                    <ExitToAppIcon />
                 </Icon1Inner>
             </SidebarIcon2>
         </SidebarContainer>
