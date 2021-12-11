@@ -4,7 +4,7 @@ import { StreamChat } from 'stream-chat'
 import { Chat } from 'stream-chat-react'
 import Cookies from 'universal-cookie'
 
-import { Channels, ChannelMain, Auth } from './components'
+import { ChannelMain, Auth, ChannelListContainer } from './components'
 
 import 'stream-chat-react/dist/css/index.css'
 
@@ -36,7 +36,7 @@ function App() {
   return ( 
     <AppContainer>
       <Chat client={client} theme="team light">
-        <Channels
+        <ChannelListContainer
           isCreating={isCreating}
           setIsCreating={setIsCreating}
           setCreateType={setCreateType}

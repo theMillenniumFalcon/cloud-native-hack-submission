@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ChannelList, useChatContext } from 'stream-chat-react'
 import styled from 'styled-components'
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import ChannelSearch from '../channelsearch/ChannelSearch'
-import CompanyHeader from '../companyheader/CompanyHeader'
 import TeamChannelList from '../teamchannellist/TeamChannelList'
 import TeamChannelPreview from '../teamchannelpreview/TeamChannelPreview'
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 const Sidebar = ({ logout }) => {
-
     return (
         <SidebarContainer>
             <SidebarIcon1>
@@ -28,7 +26,23 @@ const Sidebar = ({ logout }) => {
     )
 }
 
-const Channels = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+const CompanyHeader = () => {
+    return (
+        <CompanyHeaderContainer>
+            <HeaderText>Hangout place</HeaderText>
+        </CompanyHeaderContainer>
+    )
+}
+
+const customChannelTeamFilter = (channels) => {
+    return channels.filter((channel) => channel.type === 'team')
+}
+
+const customChannelMessagingFilter = (channels) => {
+    return channels.filter((channel) => channel.type === 'messaging')
+}
+
+const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
     const logout = () => {
         cookies.remove("token");
         cookies.remove('userId');
@@ -48,7 +62,7 @@ const Channels = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) =>
                 <ChannelSearch/>
                 <ChannelList 
                     filter={{}} 
-                    channelRenderFilterFn={() => {}}
+                    channelRenderFilterFn={customChannelTeamFilter}
                     List={(listProps) => (
                         <TeamChannelList {...listProps} type="team" 
                             isCreating={isCreating}
@@ -63,7 +77,7 @@ const Channels = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) =>
                 />
                 <ChannelList 
                     filter={{}} 
-                    channelRenderFilterFn={() => {}}
+                    channelRenderFilterFn={customChannelMessagingFilter}
                     List={(listProps) => (
                         <TeamChannelList {...listProps} type="messaging" 
                             isCreating={isCreating}
@@ -77,6 +91,22 @@ const Channels = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) =>
                     )}
                 />
             </ChannelListWrapper>
+        </>
+    )
+}
+
+const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) => {
+    const [toggleContainer, setToggleContainer] = useState(false)
+
+    return (
+        <>
+        <ChannelContainer>
+            <ChannelListContent 
+                setIsCreating={setIsCreating} 
+                setCreateType={setCreateType} 
+                setIsEditing={setIsEditing} 
+            />
+        </ChannelContainer>
         </>
     )
 }
@@ -130,4 +160,35 @@ border-radius: 9999px;
 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.33);
 `;
 
-export default Channels
+const CompanyHeaderContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 60px;
+`;
+
+const HeaderText = styled.div`
+font-size: 18px;
+font-weight: bold;
+line-height: 28px;
+color: rgb(33, 42, 46);
+`;
+
+const ChannelContainer = styled.div`
+display: flex;
+height: 100%;
+box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const ChannelContainerResponsive = styled.div`
+display: none;
+height: 100%;
+box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+position: absolute;
+width: 90%;
+top: 0%;
+z-index: 5;
+transition: 0.8s ease;
+`;
+
+export default ChannelListContainer
