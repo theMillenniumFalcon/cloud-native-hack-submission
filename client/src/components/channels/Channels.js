@@ -28,7 +28,6 @@ const Sidebar = ({ logout }) => {
     )
 }
 
-
 const Channels = () => {
     const logout = () => {
         cookies.remove("token");
