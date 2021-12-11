@@ -43,6 +43,8 @@ const customChannelMessagingFilter = (channels) => {
 }
 
 const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+    const { client } = useChatContext()
+
     const logout = () => {
         cookies.remove("token");
         cookies.remove('userId');
@@ -54,6 +56,9 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
   
         window.location.reload()
     }
+
+    const filters = { members: { $in: [client.userID] } }
+
     return (
         <>
             <Sidebar logout={logout}/>
@@ -61,7 +66,7 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
                 <CompanyHeader/>
                 <ChannelSearch/>
                 <ChannelList 
-                    filter={{}} 
+                    filter={filters} 
                     channelRenderFilterFn={customChannelTeamFilter}
                     List={(listProps) => (
                         <TeamChannelList {...listProps} type="team" 
@@ -76,7 +81,7 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
                     )}
                 />
                 <ChannelList 
-                    filter={{}} 
+                    filter={filters} 
                     channelRenderFilterFn={customChannelMessagingFilter}
                     List={(listProps) => (
                         <TeamChannelList {...listProps} type="messaging" 
@@ -106,6 +111,17 @@ const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) =>
                 setCreateType={setCreateType} 
                 setIsEditing={setIsEditing} 
             />
+            <ChannelContainerResponsive
+                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#005fff"}}
+            >
+                <ChannelContainerToggle onClick={() => setToggleContainer((prevToggleContainer) => !prevToggleContainer)} />
+            </ChannelContainerResponsive>
+            <ChannelListContent 
+                setIsCreating={setIsCreating} 
+                setCreateType={setCreateType} 
+                setIsEditing={setIsEditing}
+                setToggleContainer={setToggleContainer}
+              />
         </ChannelContainer>
         </>
     )
@@ -190,5 +206,7 @@ top: 0%;
 z-index: 5;
 transition: 0.8s ease;
 `;
+
+const ChannelContainerToggle = styled.div``;
 
 export default ChannelListContainer
