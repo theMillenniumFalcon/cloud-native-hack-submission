@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import AddChannel from '../../AddChannel'
 
 const TeamChannelList = ({ children, error = false, loading, type }) => {
     if (error) {
@@ -28,7 +29,7 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
                 <ListTitle>
                 {type === 'team' ? 'Channels' : 'DIrect Messages'}
                 </ListTitle>
-                {/* A button to add channel */}
+                <AddChannel/>
             </ListHeader>
             {children}
         </TeamChannelListContainer>
@@ -62,9 +63,10 @@ align-items: center;
 
 const ListTitle = styled.div`
 font-size: 13px;
+font-weight: 600;
 line-height: 16px;
 height: 16px;
-color: rgba(255, 255, 255, 0.66);
+color: rgb(33, 42, 46, 0.8);
 margin-bottom: 10px;
 `;
 

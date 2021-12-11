@@ -18,8 +18,9 @@ height: 60px;
 
 const HeaderText = styled.div`
 font-size: 18px;
+font-weight: bold;
 line-height: 28px;
-color: #ffffff;
+color: rgb(33, 42, 46);
 `;
 
 export default CompanyHeader

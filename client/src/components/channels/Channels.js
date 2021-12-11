@@ -72,8 +72,8 @@ const Channels = () => {
 }
 
 const ChannelListWrapper = styled.div`
-width: 15%;
-background-color: rgb(33, 42, 46);
+width: 20%;
+background-color: rgb(249,241,241);
 display: flex;
 flex-direction: column;
 `;
