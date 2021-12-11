@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useChatContext } from 'stream-chat-react'
 
-import { ClosrCreateChannel } from '../../CloseCreateChannel'
+import { CloseCreateChannel } from '../../CloseCreateChannel'
+import UserList from '../userlist/UserList'
 
 const ChannelNameInput = ({ channelName= '', setChannelName }) => {
 
@@ -13,7 +14,7 @@ const ChannelNameInput = ({ channelName= '', setChannelName }) => {
 
     return (
         <ChannelNameWrapper>
-            <p>Name</p>
+            <p>Name:</p>
             <input value={channelName} onChange={handleChange} placeholder="channel-name" />
             <p>Add Members</p>
         </ChannelNameWrapper>
@@ -21,11 +22,18 @@ const ChannelNameInput = ({ channelName= '', setChannelName }) => {
 }
 
 const CreateChannel = ({ createType, setIsCreating }) => {
+    const [channelName, setChannelName] = useState('')
+    const { client, setActiveChannel } = useChatContext();
+    const [selectedUsers, setSelectedUsers] = useState([client.userID || ''])
+
     return (
         <CreateChannelContainer>
             <CreateChannelHeader>
                 <p>{createType === 'team' ? 'Create a New Channel' : 'Send a Direct Message'}</p>
-            </CreateChannelHeader>  
+                <CloseCreateChannel setIsCreating={setIsCreating} />
+            </CreateChannelHeader>
+            {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
+            <UserList setSelectedUsers={setSelectedUsers}/>
         </CreateChannelContainer>
     )
 }
@@ -75,6 +83,7 @@ input {
     box-sizing: border-box;
     border-radius: 8px;
     padding-left: 16px;
+    outline: 0;
 }
 `;
 
