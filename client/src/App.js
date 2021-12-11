@@ -6,11 +6,23 @@ import Cookies from 'universal-cookie'
 
 import { Channels, Channel, Auth } from './components'
 
-const ApiKey = '4hjn887t4ape'
+const cookies = new Cookies()
 
-const authToken = false
+const ApiKey = '4hjn887t4ape'
+const authToken = cookies.get("token")
 
 const client = StreamChat.getInstance(ApiKey)
+
+if(authToken) {
+  client.connectUser({
+      id: cookies.get('userId'),
+      name: cookies.get('username'),
+      fullName: cookies.get('fullName'),
+      image: cookies.get('avatarURL'),
+      hashedPassword: cookies.get('hashedPassword'),
+      phoneNumber: cookies.get('phoneNumber')
+  }, authToken)
+}
 
 function App() {
 

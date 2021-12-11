@@ -1,14 +1,15 @@
 const { connect } = require('getstream')
 const  bcrypt = require('bcrypt')
-const StreaamChat = require('stream-chat')
+const StreaamChat = require('stream-chat').StreaamChat
 const crypto = require('crypto')
 const ErrorResponse = require('../utils/errorResponse')
 
+require('dotenv').config({path: "./config.env"})
 const API_KEY = process.env.STREAM_API_KEY
 const API_SECRET = process.env.STREAM_API_SECRET
 const API_ID = process.env.STREAM_API_ID
 
-const register = async (req, res, next) => {
+const signup = async (req, res, next) => {
     const { fullName, username, password, phoneNumber } = req.body
     try {
         const userId = crypto.randomBytes(16).toString('hex')
@@ -56,5 +57,5 @@ const login = async (req, res, next) => {
 }
 
 module.exports = {
-    register, login
+    signup, login
 }
