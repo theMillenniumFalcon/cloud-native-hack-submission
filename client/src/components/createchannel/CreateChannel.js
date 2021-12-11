@@ -26,6 +26,25 @@ const CreateChannel = ({ createType, setIsCreating }) => {
     const { client, setActiveChannel } = useChatContext();
     const [selectedUsers, setSelectedUsers] = useState([client.userID || ''])
 
+    const createChannel = async (e) => {
+        e.preventDefault()
+
+        try {
+            const newChannel = await client.channel(createType, channelName, {
+                name: channelName, members: selectedUsers
+            })
+
+            await newChannel.watch()
+
+            setChannelName('')
+            setIsCreating(false)
+            setSelectedUsers([client.userID])
+            setActiveChannel(newChannel)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <CreateChannelContainer>
             <CreateChannelHeader>
@@ -34,6 +53,9 @@ const CreateChannel = ({ createType, setIsCreating }) => {
             </CreateChannelHeader>
             {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
             <UserList setSelectedUsers={setSelectedUsers}/>
+            <ButtonWrapper onClick={createChannel}>
+                <p>{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</p>
+            </ButtonWrapper>
         </CreateChannelContainer>
     )
 }
@@ -84,6 +106,26 @@ input {
     border-radius: 8px;
     padding-left: 16px;
     outline: 0;
+}
+`;
+
+const ButtonWrapper = styled.div`
+height: 82px;
+background: #f7f6f8;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+border-bottom-right-radius: 16px; 
+padding: 0px 10px;
+p {
+    background: var(--primary-color);
+    font-family: Helvetica Neue, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 20px;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
 }
 `;
 
