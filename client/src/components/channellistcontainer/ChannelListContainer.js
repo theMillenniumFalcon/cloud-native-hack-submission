@@ -69,7 +69,8 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                     filter={filters} 
                     channelRenderFilterFn={customChannelTeamFilter}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps} type="team" 
+                        <TeamChannelList {...listProps} 
+                            type="team" 
                             isCreating={isCreating}
                             setIsCreating={setIsCreating} 
                             setCreateType={setCreateType} 
@@ -77,14 +78,20 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                         />
                     )}
                     Preview={(previewProps) => (
-                        <TeamChannelPreview {...previewProps} type="team" />
+                        <TeamChannelPreview 
+                            type="team"
+                            {...previewProps} 
+                            setIsCreating={setIsCreating} 
+                            setIsEditing={setIsEditing}  
+                        />
                     )}
                 />
                 <ChannelList 
                     filter={filters} 
                     channelRenderFilterFn={customChannelMessagingFilter}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps} type="messaging" 
+                        <TeamChannelList {...listProps}
+                            type="messaging"  
                             isCreating={isCreating}
                             setIsCreating={setIsCreating} 
                             setCreateType={setCreateType} 
@@ -92,7 +99,12 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                         />
                     )}
                     Preview={(previewProps) => (
-                        <TeamChannelPreview {...previewProps} type="messaging" />
+                        <TeamChannelPreview 
+                            type="team" 
+                            {...previewProps} 
+                            setIsCreating={setIsCreating} 
+                            setIsEditing={setIsEditing} 
+                        />
                     )}
                 />
             </ChannelListWrapper>
@@ -102,7 +114,7 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
 
 const ChannelListWrapper = styled.div`
 width: 20%;
-background-color: rgb(249,241,241);
+background-color: #E32636;
 display: flex;
 flex-direction: column;
 `;

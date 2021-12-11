@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Avatar, useChatContext } from 'stream-chat-react'
 
-const TeamChannelPreview = ({ channel, type }) => {
+const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, channel, type }) => {
     const { channel: activeChannel, client } = useChatContext()
 
     const ChannelPreview = () => (
@@ -45,11 +45,21 @@ const TeamChannelPreview = ({ channel, type }) => {
         <>
             {
                 channel?.id === activeChannel?.id ? (
-                    <TeamChannelPreviewContainerSelected onClick={() => {console.log(channel)}}>
+                    <TeamChannelPreviewContainerSelected 
+                        onClick={() => {
+                            setIsCreating(false)
+                            setIsEditing(false)
+                            setActiveChannel(channel)
+                        }}>
                         {type === 'team' ? <ChannelPreview /> : <DirectPreview />}
                     </TeamChannelPreviewContainerSelected>
                 ) : (
-                    <TeamChannelPreviewContainer onClick={() => {console.log(channel)}}>
+                    <TeamChannelPreviewContainer 
+                        onClick={() => {
+                            setIsCreating(false)
+                            setIsEditing(false)
+                            setActiveChannel(channel)
+                        }}>
                         {type === 'team' ? <ChannelPreview /> : <DirectPreview />}
                     </TeamChannelPreviewContainer>
                 )
@@ -88,6 +98,7 @@ height: 100%;
 width: 100%;
 text-overflow: ellipsis;
 word-break: break-all;
+cursor: pointer;
 `;
 
 const PreviewItem = styled.div`

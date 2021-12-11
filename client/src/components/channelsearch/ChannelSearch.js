@@ -69,6 +69,9 @@ border: none;
 color: #fff;
 font-size: 16px;
 outline: none;
+input {
+    outline: 0;
+}
 `;
 
 export default ChannelSearch
