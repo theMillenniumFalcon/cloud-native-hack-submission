@@ -1,7 +1,6 @@
 require('dotenv').config({path: "./config.env"})
 const express = require('express')
 const authRoute = require('./routes/auth')
-const errorHandler = require('./middleware/error')
 const cors = require("cors")
 const corsOptions = {
     origin:'*', 
@@ -43,9 +42,6 @@ app.post('/', (req, res) => {
 })
 
 app.use('/auth', authRoute)
-
-// Errorhandler
-app.use(errorHandler)
 
 const PORT = process.env.PORT || 3000
 
