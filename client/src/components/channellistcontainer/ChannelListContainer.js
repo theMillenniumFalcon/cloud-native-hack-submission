@@ -69,20 +69,21 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                     filter={filters} 
                     channelRenderFilterFn={customChannelTeamFilter}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps} 
-                            type="team" 
+                        <TeamChannelList 
+                            {...listProps}
+                            type="team"
                             isCreating={isCreating}
-                            setIsCreating={setIsCreating} 
+                            setIsCreating={setIsCreating}
                             setCreateType={setCreateType} 
                             setIsEditing={setIsEditing}
                         />
                     )}
                     Preview={(previewProps) => (
                         <TeamChannelPreview 
+                            {...previewProps}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
                             type="team"
-                            {...previewProps} 
-                            setIsCreating={setIsCreating} 
-                            setIsEditing={setIsEditing}  
                         />
                     )}
                 />
@@ -90,20 +91,21 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                     filter={filters} 
                     channelRenderFilterFn={customChannelMessagingFilter}
                     List={(listProps) => (
-                        <TeamChannelList {...listProps}
-                            type="messaging"  
+                        <TeamChannelList 
+                            {...listProps}
+                            type="messaging"
                             isCreating={isCreating}
-                            setIsCreating={setIsCreating} 
+                            setIsCreating={setIsCreating}
                             setCreateType={setCreateType} 
                             setIsEditing={setIsEditing}
                         />
                     )}
                     Preview={(previewProps) => (
                         <TeamChannelPreview 
-                            type="team" 
-                            {...previewProps} 
-                            setIsCreating={setIsCreating} 
-                            setIsEditing={setIsEditing} 
+                            {...previewProps}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
+                            type="messaging"
                         />
                     )}
                 />
