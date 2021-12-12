@@ -119,7 +119,7 @@ align-items: center;
 justify-content: flex-end;
 border-bottom-right-radius: 16px;
 p {
-    background: #005fff;
+    background-color: #E32636;
     font-weight: bold;
     font-size: 18px;
     padding: 10px 20px;

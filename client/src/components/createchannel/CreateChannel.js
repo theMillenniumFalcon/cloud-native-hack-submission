@@ -118,7 +118,7 @@ justify-content: flex-end;
 border-bottom-right-radius: 16px; 
 padding: 0px 10px;
 p {
-    background: var(--primary-color);
+    background-color: #E32636;
     font-family: Helvetica Neue, sans-serif;
     font-weight: bold;
     font-size: 18px;
