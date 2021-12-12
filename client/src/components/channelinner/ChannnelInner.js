@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
+import { ChannelInfo } from '../../ChannelInfo'
+import './ChannelInner.css'
 
 export const GiphyContext = React.createContext({})
 
@@ -52,26 +53,25 @@ const TeamChannelHeader = ({ setIsEditing }) => {
   
       if(channel.type === 'messaging') {
         return (
-          <ChannelNameWrapper>
+          <div className='team-channel-header__name-wrapper'>
             {members.map(({ user }, i) => (
-              <ChannelNameMulti key={i}>
+              <div key={i} className='team-channel-header__name-multi'>
                 <Avatar image={user.image} name={user.fullName || user.id} size={32} />
-                <ChannelNameMultiUser>{user.fullName || user.id}</ChannelNameMultiUser>
-              </ChannelNameMulti>
+                <p className='team-channel-header__name user'>{user.fullName || user.id}</p>
+              </div>
             ))}
-  
-            {additionalMembers > 0 && <ChannelNameMultiUser>and {additionalMembers} more</ChannelNameMultiUser>}
-          </ChannelNameWrapper>
+            {additionalMembers > 0 && <p className='team-channel-header__name user'>and {additionalMembers} more</p>}
+          </div>
         )
       }
   
       return (
-        <TeamChannelWrapper>
-          <TeamChannelName># {channel.data.name}</TeamChannelName>
+        <div className='team-channel-header__channel-wrapper'>
+          <p className='team-channel-header__name'># {channel.data.name}</p>
           <span style={{ display: 'flex' }} onClick={() => setIsEditing(true)}>
-            <InfoOutlinedIcon />
+            <ChannelInfo />
           </span>
-        </TeamChannelWrapper>
+        </div>
       );
     };
   
@@ -79,79 +79,16 @@ const TeamChannelHeader = ({ setIsEditing }) => {
       if (!watchers) return 'No users online';
       if (watchers === 1) return '1 user online';
       return `${watchers} users online`;
-    }
+    };
   
     return (
-      <TeamChannelContainer>
+      <div className='team-channel-header__container'>
         <MessagingHeader />
-        <ChannelRight>
-          <ChannelRightText>{getWatcherText(watcher_count)}</ChannelRightText>
-        </ChannelRight>
-      </TeamChannelContainer>
-    );
+        <div className='team-channel-header__right'>
+          <p className='team-channel-header__right-text'>{getWatcherText(watcher_count)}</p>
+        </div>
+      </div>
+    )
   }
 
-  const ChannelNameWrapper = styled.div`
-  flex: 3;
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  max-width: 500px;
-  white-space: nowrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  `;
-
-  const ChannelNameMulti = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
-  `;
-
-  const ChannelNameMultiUser = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  `;
-
-  const TeamChannelWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  `;
-
-  const TeamChannelName = styled.div`
-  font-weight: bold;
-  font-size: 18px;
-  color: #2c2c30;
-  margin-right: 8px;
-  `;
-
-  const TeamChannelContainer = styled.div`
-  position: relative;
-  height: 62px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  background: #ffffff;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
-  border-top-right-radius: 16px;
-  z-index: 1;
-  `;
-
-  const ChannelRight = styled.div`
-  flex: 0.55;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  text-align: right;
-  `;
-
-  const ChannelRightText = styled.div`
-  font-size: 14px;
-  color: #858688;
-  `;
-
-  export default ChannelInner
+  export default ChannelInner;
