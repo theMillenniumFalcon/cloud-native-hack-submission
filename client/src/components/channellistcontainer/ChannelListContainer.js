@@ -29,7 +29,7 @@ const Sidebar = ({ logout }) => {
 const CompanyHeader = () => {
     return (
         <CompanyHeaderContainer>
-            <HeaderText>Hangout place</HeaderText>
+            <HeaderText>Hangout</HeaderText>
         </CompanyHeaderContainer>
     )
 }
