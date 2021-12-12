@@ -20,7 +20,7 @@ const channelByUser = async ({ client, setActiveChannel, channel, setChannel }) 
   return setActiveChannel(newChannel);
 };
 
-const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer }) => {
+const SearchResult = ({ channel, focusedId, type, setChannel }) => {
   const { client, setActiveChannel } = useChatContext();
 
   if (type === 'channel') {
@@ -29,9 +29,6 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
             {(focusedId === channel.id) ? (
             <ChannelResultFocused onClick={() => {
                 setChannel(channel)
-                if(setToggleContainer) {
-                  setToggleContainer((prevState) => !prevState)   
-                }
               }}>
                   <ResultHashtag></ResultHashtag>
                   <ChannelResultText>
@@ -41,9 +38,6 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
             ) : (
             <ChannelResult onClick={() => {
                 setChannel(channel)
-                if(setToggleContainer) {
-                  setToggleContainer((prevState) => !prevState)   
-                }
               }}>
                     <ResultHashtag></ResultHashtag>
                     <ChannelResultText>
@@ -60,9 +54,6 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
         {(focusedId === channel.id) ? (
             <ChannelResultFocused onClick={async () => {
                 channelByUser({ client, setActiveChannel, channel, setChannel })
-                if(setToggleContainer) {
-                    setToggleContainer((prevState) => !prevState)   
-                }
               }}>
                     <ChannelResultUser>
                         <Avatar image={channel.image || undefined} name={channel.name} size={24} />
@@ -74,9 +65,6 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
             ) : (
             <ChannelResult onClick={async () => {
                 channelByUser({ client, setActiveChannel, channel, setChannel })
-                if(setToggleContainer) {
-                    setToggleContainer((prevState) => !prevState)   
-                }
               }}>
                     <ChannelResultUser>
                         <Avatar image={channel.image || undefined} name={channel.name} size={24} />
@@ -90,7 +78,7 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
   );
 };
 
-const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, setChannel, setToggleContainer }) => {
+const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, setChannel }) => {
 
   return (
     <ChannelSearchResults>
@@ -112,7 +100,6 @@ const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, set
             key={i}
             setChannel={setChannel}
             type='channel'
-            setToggleContainer={setToggleContainer}
           />
         ))
       )}
@@ -134,7 +121,6 @@ const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, set
             key={i}
             setChannel={setChannel}
             type='user'
-            setToggleContainer={setToggleContainer}
           />
         ))
       )}
