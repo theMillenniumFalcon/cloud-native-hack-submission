@@ -18,6 +18,10 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cors(corsOptions))
 
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
+
 app.post('/', (req, res) => {
     const { message, user: sender, type, members } = req.body;
 
